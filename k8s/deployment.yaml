@@ -1,3 +1,46 @@
+# Despliegue y Servicio para MongoDB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:5.0
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongodb-data
+          mountPath: /data/db
+      volumes:
+      - name: mongodb-data
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
+  type: ClusterIP
+
+# Despliegue y Servicio para el Microservicio Node.js
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,12 +57,12 @@ spec:
     spec:
       containers:
       - name: microservicio-node
-        image: node:14
+        image: microservicio-node:latest
         ports:
         - containerPort: 3000
         env:
         - name: MONGO_URL
-          value: "mongodb://mongo:27017/users"
+          value: "mongodb://mongo:27017/mydatabase"
 ---
 apiVersion: v1
 kind: Service
