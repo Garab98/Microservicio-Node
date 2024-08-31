@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: microservicio-node
-        image: microservicio-node:latest
+        image: node:14
         ports:
         - containerPort: 3000
         env:
