@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --outputFile=results/unit_result.xml --coverage",
+    "test-specific": "jest test/test_server.js --outputFile=results/unit_result.xml --coverage"
   },
   "keywords": [],
   "author": "",

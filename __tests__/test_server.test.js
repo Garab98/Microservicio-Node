@@ -1,9 +1,9 @@
 const request = require('supertest');
-const app = require('../src/server');
+const app = require('../server');
 
-describe('GET /', () => {
+describe('GET /users/', () => {
     it('should return 200 OK', async () => {
-        const res = await request(app).get('/');
+        const res = await request(app).get('/users/');
         expect(res.statusCode).toBe(200);
     });
 });
