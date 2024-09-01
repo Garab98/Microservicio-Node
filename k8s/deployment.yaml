@@ -46,7 +46,7 @@ kind: Deployment
 metadata:
   name: microservicio-node
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: microservicio-node
@@ -57,7 +57,7 @@ spec:
     spec:
       containers:
       - name: microservicio-node
-        image: microservicio-node:latest
+        image: mopito/tfm:node
         ports:
         - containerPort: 3000
         env:
